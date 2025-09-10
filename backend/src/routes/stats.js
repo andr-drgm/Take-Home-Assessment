@@ -3,14 +3,17 @@ const fsp = require('fs/promises');
 const path = require('path');
 const router = express.Router();
 const DATA_PATH = path.join(__dirname, '../../../data/items.json');
+const { mean } = require('../utils/stats');
 
 // In-memory cache with file mtime validation.
 let cache = { stats: null, mtimeMs: 0 };
 
 function computeStats(items) {
   const total = items.length;
-  const sum = items.reduce((acc, cur) => acc + (Number(cur.price) || 0), 0);
-  const averagePrice = total ? sum / total : 0;
+  const prices = items
+    .map(i => Number(i.price))
+    .filter(n => Number.isFinite(n));
+  const averagePrice = prices.length ? mean(prices) : 0;
   return { total, averagePrice };
 }
 

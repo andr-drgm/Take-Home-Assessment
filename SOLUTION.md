@@ -43,6 +43,10 @@ Changes
 - Verifies first request returns `X-Cache: MISS` and subsequent request `HIT` when mtime is unchanged.
 - Verifies changing `mtimeMs` forces a `MISS` and recomputation.
 
+Refactor
+
+- Reused the shared utility `backend/src/utils/stats.js` inside the stats route to compute `averagePrice`, improving consistency and reducing duplication.
+
 ### 4) Add New Item
 
 Changes
