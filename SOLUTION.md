@@ -17,6 +17,7 @@ Changes
 - New tests in `backend/__tests__/items.test.js` mount the items router on a throwaway Express app with `express.json()`.
 - Happy paths: list all items, search via `q`, limit results, get by `:id`, and create via POST.
 - Error cases: 404 on missing `:id`; 500 when read/write fails (mocked).
+- Validations: POST returns 400 with helpful error messages when payload is invalid.
 
 ### 2) Logger Middleware Enhancement
 
@@ -41,6 +42,12 @@ Changes
 - New tests in `backend/__tests__/stats.test.js` mount the stats router on a throwaway Express app.
 - Verifies first request returns `X-Cache: MISS` and subsequent request `HIT` when mtime is unchanged.
 - Verifies changing `mtimeMs` forces a `MISS` and recomputation.
+
+### 4) Add New Item
+
+Changes
+
+- Validate POST `/api/items` input (`name`, `category` required and length-limited; `price` is a number ≥ 0). Returns 400 with a joined error message when invalid.
 
 ## Frontend
 
@@ -80,3 +87,10 @@ Changes
 
 - Added `frontend/src/styles.css` with small, accessible styles (container, inputs, buttons, skeleton shimmer).
 - Updated `frontend/src/pages/Items.js` to import styles, add `aria-busy`, `role="status"` for loading, and show skeleton rows while loading.
+
+### 6) Add New Item Form
+
+Changes
+
+- Added a small form on the Items page with client-side validation. On submit, calls `addItem` and refreshes the list to page 1.
+- DataContext: Exposes `addItem` to perform the POST and return the created item.

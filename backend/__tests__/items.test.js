@@ -125,7 +125,7 @@ describe('/api/items routes', () => {
     const nowSpy = jest.spyOn(Date, 'now').mockReturnValue(fixedNow);
 
     const app = buildApp();
-    const payload = { name: 'New', price: 10 };
+    const payload = { name: 'New', category: 'Electronics', price: 10 };
     const res = await request(app).post('/api/items').send(payload);
 
     expect(res.status).toBe(201);
@@ -145,9 +145,27 @@ describe('/api/items routes', () => {
     fsp.writeFile.mockRejectedValueOnce(new Error('disk full'));
 
     const app = buildApp();
-    const res = await request(app).post('/api/items').send({ name: 'New', price: 10 });
+    const res = await request(app).post('/api/items').send({ name: 'New', category: 'Electronics', price: 10 });
 
     expect(res.status).toBe(500);
     expect(res.body).toHaveProperty('error');
+  });
+
+  test('POST /api/items validates payload and returns 400 for bad input', async () => {
+    fsp.readFile.mockResolvedValueOnce(JSON.stringify([]));
+    const app = buildApp();
+    let res = await request(app).post('/api/items').send({});
+    expect(res.status).toBe(400);
+    expect(res.body.error).toMatch(/name is required/i);
+
+    fsp.readFile.mockResolvedValueOnce(JSON.stringify([]));
+    res = await request(app).post('/api/items').send({ name: 'A', category: 'B', price: -1 });
+    expect(res.status).toBe(400);
+    expect(res.body.error).toMatch(/price must be >= 0/i);
+
+    fsp.readFile.mockResolvedValueOnce(JSON.stringify([]));
+    res = await request(app).post('/api/items').send({ name: 'A', category: '', price: 1 });
+    expect(res.status).toBe(400);
+    expect(res.body.error).toMatch(/category is required/i);
   });
 });

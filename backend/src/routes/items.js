@@ -64,10 +64,30 @@ router.get('/:id', async (req, res, next) => {
 // POST /api/items
 router.post('/', async (req, res, next) => {
   try {
-    // TODO: Validate payload (intentional omission)
-    const item = req.body;
+    const payload = req.body || {};
+
+    // Basic validation
+    const errors = [];
+    const name = typeof payload.name === 'string' ? payload.name.trim() : '';
+    const category = typeof payload.category === 'string' ? payload.category.trim() : '';
+    const priceNum = typeof payload.price === 'string' ? Number(payload.price) : payload.price;
+    const price = typeof priceNum === 'number' && !Number.isNaN(priceNum) ? priceNum : NaN;
+
+    if (!name) errors.push('name is required');
+    if (name && name.length > 100) errors.push('name must be <= 100 characters');
+    if (!category) errors.push('category is required');
+    if (category && category.length > 50) errors.push('category must be <= 50 characters');
+    if (Number.isNaN(price)) errors.push('price must be a number');
+    if (!Number.isNaN(price) && price < 0) errors.push('price must be >= 0');
+
+    if (errors.length) {
+      const err = new Error(errors.join(', '));
+      err.status = 400;
+      throw err;
+    }
+
     const data = await readData();
-    item.id = Date.now();
+    const item = { id: Date.now(), name, category, price };
     data.push(item);
     await fsp.writeFile(DATA_PATH, JSON.stringify(data, null, 2));
     res.status(201).json(item);

@@ -36,8 +36,29 @@ export function DataProvider({ children }) {
     }
   }, [API_BASE, q, page, limit]);
 
+  const addItem = useCallback(async ({ name, category, price }, { signal } = {}) => {
+    const res = await fetch(`${API_BASE}/api/items`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, category, price }),
+      signal,
+    });
+    if (!res.ok) {
+      let message = 'Failed to create item';
+      try {
+        const err = await res.json();
+        message = err?.error || message;
+      } catch (_) {}
+      const e = new Error(message);
+      e.status = res.status;
+      throw e;
+    }
+    const created = await res.json();
+    return created;
+  }, [API_BASE]);
+
   return (
-    <DataContext.Provider value={{ items, total, page, limit, q, hasMore, setQ, setPage, setLimit, fetchItems }}>
+    <DataContext.Provider value={{ items, total, page, limit, q, hasMore, setQ, setPage, setLimit, fetchItems, addItem }}>
       {children}
     </DataContext.Provider>
   );
