@@ -22,4 +22,15 @@ Changes
 - Uses `res.on('finish')` to log after the response is sent, including status and latency.
 - Includes ISO timestamp, HTTP method, URL, status code, and duration in ms.
 
+### 3) `/api/stats` Caching
+
+Implemented in-memory caching with mtime validation.
+
+Changes
+
+- Fixed data path to `../../../data/items.json` from `../../data/items.json`.
+- Added cache storing computed stats and source file `mtimeMs`.
+- On each request, compare `fs.stat` mtime to validate cache; recompute on mismatch.
+- Added `X-Cache: HIT|MISS` response header for debuggability.
+
 ## Frontend
