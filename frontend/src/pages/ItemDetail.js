@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { API_BASE } from '../config';
 
 function ItemDetail() {
   const { id } = useParams();
@@ -7,7 +8,7 @@ function ItemDetail() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('/api/items/' + id)
+    fetch(`${API_BASE}/api/items/` + id)
       .then(res => res.ok ? res.json() : Promise.reject(res))
       .then(setItem)
       .catch(() => navigate('/'));

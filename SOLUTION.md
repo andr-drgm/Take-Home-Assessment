@@ -40,3 +40,18 @@ Changes
 - Verifies changing `mtimeMs` forces a `MISS` and recomputation.
 
 ## Frontend
+
+### 1) Fix Items.js Memory Leak
+
+Changes
+
+- Made data fetching abortable to prevent `setState` after unmount.
+- `frontend/src/state/DataContext.js`: `fetchItems` now accepts an optional `{ signal }` and ignores `AbortError`.
+- `frontend/src/pages/Items.js`: creates `AbortController`, passes `signal` to `fetchItems`, and aborts in cleanup.
+
+### 2) Frontend API Base URL
+
+Changes
+
+- Introduced `frontend/src/config.js` exporting `API_BASE` (default `http://localhost:5000`, override via `REACT_APP_API_BASE_URL`).
+- Switched fetch calls to use `${API_BASE}/api/...` in `DataContext.js` and `ItemDetail.js` so the frontend targets port 5000, not 3000.
