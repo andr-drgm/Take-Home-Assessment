@@ -10,6 +10,8 @@ async function readData() {
   return JSON.parse(raw);
 }
 
+const { normalize } = require('../utils/items');
+
 // GET /api/items
 // Supports query params: q (string), page (>=1), limit (<=100)
 router.get('/', async (req, res, next) => {
@@ -27,11 +29,12 @@ router.get('/', async (req, res, next) => {
       throw err;
     }
 
-    let filtered = data;
-    if (typeof q === 'string' && q.trim().length > 0) {
-      const needle = q.toLowerCase();
-      filtered = data.filter(item => String(item.name || '').toLowerCase().includes(needle));
-    }
+    // Build a prepared array with a precomputed normalized name (nameNorm)
+    const prepared = data.map(item => ({ item, nameNorm: normalize(item.name) }));
+    const needle = normalize(q).trim();
+    const filtered = needle
+      ? prepared.filter(p => p.nameNorm.includes(needle)).map(p => p.item)
+      : data;
 
     const total = filtered.length;
     const start = (parsedPage - 1) * parsedLimit;
