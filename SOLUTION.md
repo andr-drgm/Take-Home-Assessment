@@ -2,7 +2,7 @@
 
 ## Backend
 
-### 1) Async I/O Refactor
+### 1) Async I/O Refactor + Items Pagination/Search
 
 Refactored the items routes to avoid blocking the event loop.
 
@@ -10,7 +10,10 @@ Changes
 
 - Switched to `fs/promises` and `async/await` for reads/writes.
 - Converted route handlers to `async` and `await` I/O calls.
-- Preserved existing behavior (supports `q` and `limit` query params and basic POST create).
+- Added server-side pagination and search to `/api/items`.
+  - Params: `q` (string), `page` (>=1), `limit` (<=100, default 20)
+  - Response: `{ items, total, page, limit, hasMore }`
+  - Input validation: returns 400 on invalid `page`.
 - New tests in `backend/__tests__/items.test.js` mount the items router on a throwaway Express app with `express.json()`.
 - Happy paths: list all items, search via `q`, limit results, get by `:id`, and create via POST.
 - Error cases: 404 on missing `:id`; 500 when read/write fails (mocked).
@@ -55,3 +58,10 @@ Changes
 
 - Introduced `frontend/src/config.js` exporting `API_BASE` (default `http://localhost:5000`, override via `REACT_APP_API_BASE_URL`).
 - Switched fetch calls to use `${API_BASE}/api/...` in `DataContext.js` and `ItemDetail.js` so the frontend targets port 5000, not 3000.
+
+### 3) Items Pagination & Search UI
+
+Changes
+
+- `frontend/src/state/DataContext.js`: tracks `items`, `total`, `page`, `limit`, `q`, `hasMore`; `fetchItems` builds URL with `q`, `page`, `limit` and updates state from the new API shape.
+- `frontend/src/pages/Items.js`: adds a search input, shows total, and provides Prev/Next pagination controls; fetches whenever `q`, `page`, or `limit` change.

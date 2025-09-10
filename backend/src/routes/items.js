@@ -11,22 +11,35 @@ async function readData() {
 }
 
 // GET /api/items
+// Supports query params: q (string), page (>=1), limit (<=100)
 router.get('/', async (req, res, next) => {
   try {
     const data = await readData();
-    const { limit, q } = req.query;
-    let results = data;
+    let { q = '', page = '1', limit = '20' } = req.query;
 
-    if (q) {
-      // Simple substring search (sub‑optimal)
-      results = results.filter(item => item.name.toLowerCase().includes(q.toLowerCase()));
+    // Normalize and validate
+    const MAX_LIMIT = 100;
+    const parsedPage = parseInt(page, 10);
+    const parsedLimit = Math.min(MAX_LIMIT, Math.max(1, parseInt(limit, 10) || 20));
+    if (!Number.isInteger(parsedPage) || parsedPage < 1) {
+      const err = new Error('Invalid page parameter');
+      err.status = 400;
+      throw err;
     }
 
-    if (limit) {
-      results = results.slice(0, parseInt(limit));
+    let filtered = data;
+    if (typeof q === 'string' && q.trim().length > 0) {
+      const needle = q.toLowerCase();
+      filtered = data.filter(item => String(item.name || '').toLowerCase().includes(needle));
     }
 
-    res.json(results);
+    const total = filtered.length;
+    const start = (parsedPage - 1) * parsedLimit;
+    const end = start + parsedLimit;
+    const items = filtered.slice(start, end);
+    const hasMore = end < total;
+
+    res.json({ items, total, page: parsedPage, limit: parsedLimit, hasMore });
   } catch (err) {
     next(err);
   }

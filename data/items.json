@@ -1,17 +1,362 @@
 [
-  { "id": 1, "name": "Laptop Pro", "category": "Electronics", "price": 2499 },
+  { "id": 1, "name": "Wireless Mouse", "category": "Electronics", "price": 25 },
   {
     "id": 2,
-    "name": "Noise Cancelling Headphones",
+    "name": "Bluetooth Speaker",
     "category": "Electronics",
-    "price": 399
+    "price": 45
   },
   {
     "id": 3,
-    "name": "Ultra‑Wide Monitor",
+    "name": "Gaming Keyboard",
     "category": "Electronics",
-    "price": 999
+    "price": 80
   },
-  { "id": 4, "name": "Ergonomic Chair", "category": "Furniture", "price": 799 },
-  { "id": 5, "name": "Standing Desk", "category": "Furniture", "price": 1199 }
+  { "id": 4, "name": "4K Monitor", "category": "Electronics", "price": 350 },
+  { "id": 5, "name": "USB-C Hub", "category": "Electronics", "price": 60 },
+  {
+    "id": 6,
+    "name": "Smartphone Stand",
+    "category": "Accessories",
+    "price": 15
+  },
+  { "id": 7, "name": "Laptop Sleeve", "category": "Accessories", "price": 30 },
+  {
+    "id": 8,
+    "name": "Ergonomic Mouse Pad",
+    "category": "Accessories",
+    "price": 20
+  },
+  {
+    "id": 9,
+    "name": "Noise Cancelling Headphones",
+    "category": "Electronics",
+    "price": 120
+  },
+  {
+    "id": 10,
+    "name": "Portable Charger",
+    "category": "Electronics",
+    "price": 40
+  },
+  { "id": 11, "name": "Standing Desk", "category": "Furniture", "price": 250 },
+  { "id": 12, "name": "Office Chair", "category": "Furniture", "price": 150 },
+  { "id": 13, "name": "Desk Lamp", "category": "Furniture", "price": 35 },
+  { "id": 14, "name": "Bookshelf", "category": "Furniture", "price": 120 },
+  { "id": 15, "name": "Coffee Table", "category": "Furniture", "price": 180 },
+  { "id": 16, "name": "Smartwatch", "category": "Electronics", "price": 200 },
+  {
+    "id": 17,
+    "name": "Fitness Tracker",
+    "category": "Electronics",
+    "price": 90
+  },
+  {
+    "id": 18,
+    "name": "Wireless Earbuds",
+    "category": "Electronics",
+    "price": 75
+  },
+  { "id": 19, "name": "Tablet", "category": "Electronics", "price": 300 },
+  {
+    "id": 20,
+    "name": "External Hard Drive",
+    "category": "Electronics",
+    "price": 110
+  },
+  {
+    "id": 21,
+    "name": "Graphic Tablet",
+    "category": "Electronics",
+    "price": 250
+  },
+  { "id": 22, "name": "Webcam", "category": "Electronics", "price": 55 },
+  {
+    "id": 23,
+    "name": "Wireless Router",
+    "category": "Electronics",
+    "price": 130
+  },
+  { "id": 24, "name": "HDMI Cable", "category": "Accessories", "price": 10 },
+  { "id": 25, "name": "Laptop Stand", "category": "Accessories", "price": 40 },
+  {
+    "id": 26,
+    "name": "Desk Organizer",
+    "category": "Accessories",
+    "price": 25
+  },
+  { "id": 27, "name": "Monitor Arm", "category": "Accessories", "price": 70 },
+  {
+    "id": 28,
+    "name": "Smart Light Bulb",
+    "category": "Electronics",
+    "price": 20
+  },
+  { "id": 29, "name": "VR Headset", "category": "Electronics", "price": 400 },
+  { "id": 30, "name": "Drone", "category": "Electronics", "price": 500 },
+  {
+    "id": 31,
+    "name": "Electric Kettle",
+    "category": "Home Appliances",
+    "price": 60
+  },
+  {
+    "id": 32,
+    "name": "Air Purifier",
+    "category": "Home Appliances",
+    "price": 150
+  },
+  { "id": 33, "name": "Blender", "category": "Home Appliances", "price": 80 },
+  {
+    "id": 34,
+    "name": "Microwave Oven",
+    "category": "Home Appliances",
+    "price": 120
+  },
+  {
+    "id": 35,
+    "name": "Coffee Maker",
+    "category": "Home Appliances",
+    "price": 100
+  },
+  {
+    "id": 36,
+    "name": "Smart Thermostat",
+    "category": "Home Appliances",
+    "price": 200
+  },
+  {
+    "id": 37,
+    "name": "Robot Vacuum",
+    "category": "Home Appliances",
+    "price": 300
+  },
+  {
+    "id": 38,
+    "name": "Electric Toothbrush",
+    "category": "Personal Care",
+    "price": 50
+  },
+  { "id": 39, "name": "Hair Dryer", "category": "Personal Care", "price": 40 },
+  { "id": 40, "name": "Shaving Kit", "category": "Personal Care", "price": 35 },
+  { "id": 41, "name": "Yoga Mat", "category": "Fitness", "price": 25 },
+  { "id": 42, "name": "Dumbbell Set", "category": "Fitness", "price": 100 },
+  { "id": 43, "name": "Treadmill", "category": "Fitness", "price": 800 },
+  { "id": 44, "name": "Exercise Bike", "category": "Fitness", "price": 600 },
+  { "id": 45, "name": "Resistance Bands", "category": "Fitness", "price": 30 },
+  { "id": 46, "name": "Camping Tent", "category": "Outdoor", "price": 150 },
+  { "id": 47, "name": "Sleeping Bag", "category": "Outdoor", "price": 80 },
+  { "id": 48, "name": "Hiking Backpack", "category": "Outdoor", "price": 120 },
+  { "id": 49, "name": "Portable Grill", "category": "Outdoor", "price": 90 },
+  { "id": 50, "name": "LED Flashlight", "category": "Outdoor", "price": 25 },
+  { "id": 51, "name": "Smartphone", "category": "Electronics", "price": 700 },
+  { "id": 52, "name": "Laptop Pro", "category": "Electronics", "price": 1200 },
+  {
+    "id": 53,
+    "name": "Wireless Charger",
+    "category": "Electronics",
+    "price": 35
+  },
+  {
+    "id": 54,
+    "name": "Smart Home Hub",
+    "category": "Electronics",
+    "price": 150
+  },
+  { "id": 55, "name": "Electric Scooter", "category": "Outdoor", "price": 450 },
+  {
+    "id": 56,
+    "name": "Action Camera",
+    "category": "Electronics",
+    "price": 250
+  },
+  {
+    "id": 57,
+    "name": "Digital Photo Frame",
+    "category": "Electronics",
+    "price": 90
+  },
+  {
+    "id": 58,
+    "name": "Wireless Security Camera",
+    "category": "Electronics",
+    "price": 130
+  },
+  {
+    "id": 59,
+    "name": "Smart Door Lock",
+    "category": "Electronics",
+    "price": 180
+  },
+  {
+    "id": 60,
+    "name": "Electric Toothbrush Replacement Heads",
+    "category": "Personal Care",
+    "price": 20
+  },
+  {
+    "id": 61,
+    "name": "Bluetooth Fitness Tracker",
+    "category": "Fitness",
+    "price": 70
+  },
+  {
+    "id": 62,
+    "name": "Adjustable Dumbbells",
+    "category": "Fitness",
+    "price": 150
+  },
+  { "id": 63, "name": "Foam Roller", "category": "Fitness", "price": 30 },
+  { "id": 64, "name": "Massage Gun", "category": "Fitness", "price": 120 },
+  {
+    "id": 65,
+    "name": "Electric Grill",
+    "category": "Home Appliances",
+    "price": 130
+  },
+  {
+    "id": 66,
+    "name": "Slow Cooker",
+    "category": "Home Appliances",
+    "price": 90
+  },
+  {
+    "id": 67,
+    "name": "Air Fryer",
+    "category": "Home Appliances",
+    "price": 110
+  },
+  {
+    "id": 68,
+    "name": "Vacuum Cleaner",
+    "category": "Home Appliances",
+    "price": 200
+  },
+  { "id": 69, "name": "Smart Scale", "category": "Fitness", "price": 60 },
+  {
+    "id": 70,
+    "name": "Electric Shaver",
+    "category": "Personal Care",
+    "price": 70
+  },
+  {
+    "id": 71,
+    "name": "Hair Straightener",
+    "category": "Personal Care",
+    "price": 50
+  },
+  {
+    "id": 72,
+    "name": "Electric Blanket",
+    "category": "Home Appliances",
+    "price": 80
+  },
+  { "id": 73, "name": "Smart Plug", "category": "Electronics", "price": 25 },
+  {
+    "id": 74,
+    "name": "Wireless Keyboard",
+    "category": "Electronics",
+    "price": 65
+  },
+  { "id": 75, "name": "Monitor Stand", "category": "Accessories", "price": 40 },
+  {
+    "id": 76,
+    "name": "Cable Management Kit",
+    "category": "Accessories",
+    "price": 20
+  },
+  { "id": 77, "name": "Portable SSD", "category": "Electronics", "price": 150 },
+  {
+    "id": 78,
+    "name": "Laptop Cooling Pad",
+    "category": "Accessories",
+    "price": 30
+  },
+  {
+    "id": 79,
+    "name": "Ergonomic Chair",
+    "category": "Furniture",
+    "price": 220
+  },
+  {
+    "id": 80,
+    "name": "Desk Drawer Organizer",
+    "category": "Accessories",
+    "price": 15
+  },
+  {
+    "id": 81,
+    "name": "Wireless Gaming Mouse",
+    "category": "Electronics",
+    "price": 90
+  },
+  {
+    "id": 82,
+    "name": "Smart Light Switch",
+    "category": "Electronics",
+    "price": 40
+  },
+  {
+    "id": 83,
+    "name": "Electric Kettle Stainless Steel",
+    "category": "Home Appliances",
+    "price": 70
+  },
+  {
+    "id": 84,
+    "name": "Indoor Plant Pot",
+    "category": "Home Decor",
+    "price": 25
+  },
+  { "id": 85, "name": "Wall Art Set", "category": "Home Decor", "price": 150 },
+  { "id": 86, "name": "Area Rug", "category": "Home Decor", "price": 200 },
+  { "id": 87, "name": "Throw Blanket", "category": "Home Decor", "price": 60 },
+  { "id": 88, "name": "Table Lamp", "category": "Home Decor", "price": 45 },
+  {
+    "id": 89,
+    "name": "Bluetooth Car Adapter",
+    "category": "Electronics",
+    "price": 35
+  },
+  {
+    "id": 90,
+    "name": "Car Phone Mount",
+    "category": "Accessories",
+    "price": 20
+  },
+  { "id": 91, "name": "Dash Cam", "category": "Electronics", "price": 100 },
+  {
+    "id": 92,
+    "name": "Portable Jump Starter",
+    "category": "Automotive",
+    "price": 120
+  },
+  {
+    "id": 93,
+    "name": "Car Vacuum Cleaner",
+    "category": "Automotive",
+    "price": 50
+  },
+  { "id": 94, "name": "Smart Bike Lock", "category": "Outdoor", "price": 80 },
+  { "id": 95, "name": "Electric Bike", "category": "Outdoor", "price": 1000 },
+  { "id": 96, "name": "Camping Chair", "category": "Outdoor", "price": 60 },
+  {
+    "id": 97,
+    "name": "Waterproof Backpack",
+    "category": "Outdoor",
+    "price": 110
+  },
+  { "id": 98, "name": "Binoculars", "category": "Outdoor", "price": 90 },
+  {
+    "id": 99,
+    "name": "Portable Solar Charger",
+    "category": "Outdoor",
+    "price": 70
+  },
+  {
+    "id": 100,
+    "name": "Smart Garden Sensor",
+    "category": "Home Appliances",
+    "price": 130
+  }
 ]

@@ -31,7 +31,7 @@ describe('/api/items routes', () => {
     jest.doMock('fs/promises', () => fsp, { virtual: true });
   });
 
-  test('GET /api/items returns all items (happy path)', async () => {
+  test('GET /api/items returns paginated items with metadata (happy path)', async () => {
     const data = [
       { id: 1, name: 'Apple', price: 1 },
       { id: 2, name: 'Banana', price: 2 },
@@ -39,14 +39,20 @@ describe('/api/items routes', () => {
     fsp.readFile.mockResolvedValueOnce(JSON.stringify(data));
 
     const app = buildApp();
-    const res = await request(app).get('/api/items');
+    const res = await request(app).get('/api/items').query({ page: 1, limit: 10 });
 
     expect(res.status).toBe(200);
-    expect(res.body).toEqual(data);
+    expect(res.body).toEqual({
+      items: data,
+      total: 2,
+      page: 1,
+      limit: 10,
+      hasMore: false,
+    });
     expect(fsp.readFile).toHaveBeenCalledTimes(1);
   });
 
-  test('GET /api/items supports search (q) and limit', async () => {
+  test('GET /api/items supports search (q) and pagination limit', async () => {
     const data = [
       { id: 1, name: 'Alpha', price: 1 },
       { id: 2, name: 'Beta', price: 2 },
@@ -55,10 +61,16 @@ describe('/api/items routes', () => {
     fsp.readFile.mockResolvedValueOnce(JSON.stringify(data));
 
     const app = buildApp();
-    const res = await request(app).get('/api/items').query({ q: 'alp', limit: 1 });
+    const res = await request(app).get('/api/items').query({ q: 'alp', limit: 1, page: 1 });
 
     expect(res.status).toBe(200);
-    expect(res.body).toEqual([{ id: 1, name: 'Alpha', price: 1 }]);
+    expect(res.body).toEqual({
+      items: [{ id: 1, name: 'Alpha', price: 1 }],
+      total: 2,
+      page: 1,
+      limit: 1,
+      hasMore: true,
+    });
   });
 
   test('GET /api/items/:id returns matching item', async () => {
@@ -93,6 +105,15 @@ describe('/api/items routes', () => {
 
     expect(res.status).toBe(500);
     expect(res.body).toHaveProperty('error');
+  });
+
+  test('GET /api/items returns 400 on invalid page', async () => {
+    const data = [ { id: 1, name: 'A' } ];
+    fsp.readFile.mockResolvedValueOnce(JSON.stringify(data));
+    const app = buildApp();
+    const res = await request(app).get('/api/items').query({ page: 0 });
+    expect(res.status).toBe(400);
+    expect(res.body).toHaveProperty('error', 'Invalid page parameter');
   });
 
   test('POST /api/items creates item and writes file', async () => {
@@ -130,4 +151,3 @@ describe('/api/items routes', () => {
     expect(res.body).toHaveProperty('error');
   });
 });
-
