@@ -65,3 +65,11 @@ Changes
 
 - `frontend/src/state/DataContext.js`: tracks `items`, `total`, `page`, `limit`, `q`, `hasMore`; `fetchItems` builds URL with `q`, `page`, `limit` and updates state from the new API shape.
 - `frontend/src/pages/Items.js`: adds a search input, shows total, and provides Prev/Next pagination controls; fetches whenever `q`, `page`, or `limit` change.
+
+### 4) Virtualized List (react-window)
+
+Changes
+
+- Added `react-window` to `frontend/package.json`.
+- Updated `frontend/src/pages/Items.js` to render items with `FixedSizeList` (44px rows, 480px viewport) instead of mapping the entire array.
+- Uses stable `itemKey` derived from item id to keep rows consistent.
