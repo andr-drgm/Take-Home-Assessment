@@ -1,0 +1,58 @@
+/* Minimal UI polish and accessibility */
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  width: 100%;
+  max-width: 320px;
+}
+.input:focus-visible {
+  outline: 3px solid #2684FF;
+  outline-offset: 1px;
+}
+
+.btn {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.muted {
+  color: #555;
+}
+
+.listBox {
+  border: 1px solid #eee;
+  border-radius: 4px;
+}
+
+/* Skeleton loading shimmer */
+.skeleton-row {
+  height: 44px; /* keep in sync with list row height */
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #f2f2f2 25%, #e9e9e9 37%, #f2f2f2 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.2s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+

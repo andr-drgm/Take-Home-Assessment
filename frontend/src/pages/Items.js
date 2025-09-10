@@ -2,10 +2,14 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { useData } from '../state/DataContext';
 import { Link } from 'react-router-dom';
 import { FixedSizeList as List } from 'react-window';
+import '../styles.css';
 
 function Items() {
   const { items, total, page, limit, q, hasMore, setQ, setPage, fetchItems } = useData();
   const [loading, setLoading] = useState(false);
+
+  // Must be declared before any conditional returns to keep hooks order stable
+  const itemKey = useMemo(() => (index) => items[index]?.id ?? index, [items]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -23,25 +27,34 @@ function Items() {
     setPage(1);
   };
 
-  if (loading && !items.length) return <p>Loading...</p>;
-
-  const itemKey = useMemo(() => (index) => items[index]?.id ?? index, [items]);
+  if (loading && !items.length) {
+    return (
+      <div className="container" aria-busy="true">
+        <p role="status" aria-live="polite" className="muted" style={{ marginBottom: 8 }}>Loading items…</p>
+        <div className="listBox" aria-hidden="true">
+          {Array.from({ length: 10 }).map((_, i) => (
+            <div key={i} className="skeleton-row skeleton" />
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div style={{ padding: 16 }}>
+    <div className="container" aria-busy={loading ? 'true' : 'false'}>
       <div style={{ marginBottom: 12 }}>
         <input
           aria-label="Search items"
           placeholder="Search..."
           value={q}
           onChange={onSearchChange}
-          style={{ padding: 8, width: '100%', maxWidth: 320 }}
+          className="input"
         />
       </div>
-      <div style={{ marginBottom: 8, color: '#555' }}>
+      <div className="muted" style={{ marginBottom: 8 }}>
         Showing {items.length} of {total} items
       </div>
-      <div style={{ border: '1px solid #eee', borderRadius: 4 }}>
+      <div className="listBox">
         <List
           height={480}
           itemCount={items.length}
@@ -61,11 +74,11 @@ function Items() {
         </List>
       </div>
       <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginTop: 12 }}>
-        <button onClick={() => setPage(Math.max(1, page - 1))} disabled={page <= 1 || loading}>
+        <button className="btn" onClick={() => setPage(Math.max(1, page - 1))} disabled={page <= 1 || loading}>
           Prev
         </button>
         <span>Page {page}</span>
-        <button onClick={() => setPage(page + 1)} disabled={!hasMore || loading}>
+        <button className="btn" onClick={() => setPage(page + 1)} disabled={!hasMore || loading}>
           Next
         </button>
       </div>

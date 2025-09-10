@@ -73,3 +73,10 @@ Changes
 - Added `react-window` to `frontend/package.json`.
 - Updated `frontend/src/pages/Items.js` to render items with `FixedSizeList` (44px rows, 480px viewport) instead of mapping the entire array.
 - Uses stable `itemKey` derived from item id to keep rows consistent.
+
+### 5) UI/UX Polish (Minimal CSS)
+
+Changes
+
+- Added `frontend/src/styles.css` with small, accessible styles (container, inputs, buttons, skeleton shimmer).
+- Updated `frontend/src/pages/Items.js` to import styles, add `aria-busy`, `role="status"` for loading, and show skeleton rows while loading.
